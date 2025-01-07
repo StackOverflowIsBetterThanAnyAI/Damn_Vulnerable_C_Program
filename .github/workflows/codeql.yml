@@ -36,7 +36,7 @@ jobs:
         
     - if: matrix.build-mode == 'manual'
       shell: bash
-      run: gcc -o dvcp dvcp.c
+      run: gcc -o not not.c
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
