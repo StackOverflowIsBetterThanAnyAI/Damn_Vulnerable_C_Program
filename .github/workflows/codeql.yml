@@ -33,8 +33,9 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        cd linux
-        make
+        for file in linux/*.c; do
+          gcc -o "${file%.c}" "$file"
+        done
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
