@@ -33,23 +33,11 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        for file in *.c; do
-          gcc -o "${file%.c}" "$file"
+        for dir in linux; do
+          make -C $dir
         done
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
-
-  build-linux:
-    name: Build in Linux Folder
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Run make in linux folder
-      run: |
-        cd linux
-        make
