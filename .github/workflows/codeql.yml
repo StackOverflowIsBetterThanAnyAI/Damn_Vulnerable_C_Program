@@ -11,18 +11,14 @@ jobs:
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     permissions:
-
       security-events: write
-
       packages: read
-
     strategy:
       fail-fast: false
       matrix:
         include:
         - language: c-cpp
           build-mode: manual
-        
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -45,3 +41,15 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+
+  build-linux:
+    name: Build in Linux Folder
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run make in linux folder
+      run: |
+        cd linux
+        make
