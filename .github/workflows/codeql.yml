@@ -33,7 +33,7 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        for file in linux/*.c; do
+        for file in *.c; do
           gcc -o "${file%.c}" "$file"
         done
 
